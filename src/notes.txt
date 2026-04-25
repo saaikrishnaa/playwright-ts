@@ -1,0 +1,239 @@
+TypeScript Basics
+
+Variables: const, let, var
+
+Definition: Variable declarations with scope + mutability differences
+Core Idea: Prefer immutability + block scope
+Interview Why: Scope + hoisting questions are common
+
+Syntax / Usage
+
+const a = 10;
+let b = 20;
+var c = 30;
+
+Key Points
+
+const → block-scoped, no reassignment (object mutation allowed)
+let → block-scoped, reassignable
+var → function-scoped, hoisted, can redeclare
+
+var → initialized as undefined
+let/const → TDZ (Temporal Dead Zone)
+
+const does not mean immutable object
+var causes scope leaks in loops
+Accessing let/const before declaration → runtime error
+
+Interview Focus
+
+Q: Difference between let and var
+A: Scope + hoisting + redeclaration
+
+Q: Is const immutable?
+A: No, only binding is immutable
+
+var → avoid
+let → mutable
+const → default choice
+
+Example
+
+const obj = { name: "ska" };
+obj.name = "new";
+// obj = {}
+
+Related Concepts
+
+scope
+hoisting
+closure
+
+
+TypeScript Typing
+
+Concept
+
+Definition: Static typing on top of JavaScript
+Core Idea: Catch errors at compile time
+Interview Why: Type safety + design clarity
+
+Syntax / Usage
+
+let age: number = 20;
+let name: string = "ska";
+let isEnabled: boolean = true;
+
+Key Points
+
+Type inference works automatically
+Explicit types improve readability
+Prefer strict typing (noImplicitAny)
+
+any disables type safety
+Inconsistent typing → runtime bugs
+
+Interview Focus
+
+Q: any vs unknown
+A: any → no checks, unknown → requires type narrowing
+
+number, string, boolean
+any → avoid
+unknown → safer
+
+Example
+
+let data: unknown = "hi";
+
+if (typeof data === "string") {
+  console.log(data.toUpperCase());
+}
+
+Related Concepts
+
+type inference
+type narrowing
+
+
+Common & Advanced Types
+
+Concept
+
+Definition: Structured typing for real-world data
+Core Idea: Combine and constrain types
+Interview Why: Used in API models + test data
+
+Syntax / Usage
+
+let value: string | number;
+
+let nums: number[] = [1, 2, 3];
+let names: Array<string> = ["a", "b"];
+
+let details: [string, number] = ["ska", 10];
+
+enum Direction {
+  Up,
+  Down,
+  Left,
+  Right
+}
+let move: Direction = Direction.Up;
+
+let person: { name: string; age: number } = {
+  name: "ska",
+  age: 10
+};
+
+Key Points
+
+Union → multiple allowed types
+Tuple → fixed length + order
+Enum → named constants
+Arrays → homogeneous types
+
+Tuple order mismatch → error
+Enum values default to 0,1,2...
+Object type must match structure exactly
+
+Interview Focus
+
+Q: Union vs Any
+A: Union restricts, any allows everything
+
+Q: Tuple vs Array
+A: Tuple = fixed structure, Array = dynamic
+
+| → union
+[] → array
+[type, type] → tuple
+enum → constants
+
+Example
+
+function printId(id: string | number) {
+  if (typeof id === "string") {
+    console.log(id.toUpperCase());
+  }
+}
+
+Related Concepts
+
+interface
+type alias
+generics
+
+
+Operators (=, ==, ===)
+
+Concept
+
+Definition: Assignment vs equality checks
+Core Idea: Avoid coercion bugs
+Interview Why: Classic JS trap
+
+Syntax / Usage
+
+let a = 1;
+a = 2;
+
+1 == "1";
+1 === "1";
+
+Key Points
+
+= → assignment
+== → loose equality (type coercion)
+=== → strict equality (no coercion)
+
+== leads to unpredictable results
+Always prefer ===
+
+Interview Focus
+
+Q: Why avoid ==?
+A: Implicit type conversion → bugs
+
+= → assign
+== → avoid
+=== → use
+
+Example
+
+console.log(0 == false);
+console.log(0 === false);
+
+Related Concepts
+
+type coercion
+truthy/falsy
+
+
+Operators
+
+TypeScript supports all JavaScript operators along with type safety benefits
+
+1. arithmetic
+
+let a = 10;
+let b = 5;
+console.log(a + b);
+
+2. assignment
+
+let x = 10;
+x += 5;
+x -= 3;
+
+3. comparison
+
+4. logical
+
+5. bitwise - low level binary operations
+
+6. unary - operate on single operand
+
+7. ternary - short form of if else
+
+8. type - type checking, type assertions in ts
