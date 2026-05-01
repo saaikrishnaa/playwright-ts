@@ -37,9 +37,9 @@ function combineDetails(val1: number, val2: string): number;
 function combineDetails(val1: number, val2?: string): number;
 function combineDetails(...args: any[]): any;
 
-// function combineDetails(...args: any[]) : any {
-//     return args.reduce((acc, val) => acc + val, '');
-// }
+function combineDetails(...args: any[]) : any {
+    return args.reduce((acc, val) => acc + val, '');
+}
 
 console.log(combineDetails("hello","100"));
 console.log(combineDetails("hello","anasinga"));
