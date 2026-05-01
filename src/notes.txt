@@ -1,0 +1,36 @@
+function combineDetails(...args: any[]): any;
+
+function combineDetails(...args: any[]) : any {
+    return args.reduce((acc, val) => acc + val, '');
+}
+
+Here's what's happening in this function:
+
+Function Signature:
+
+...args: any[] — Rest parameters that collect all arguments passed to the function into an array called args. It accepts any number of arguments of any type.
+: any — Return type is any (could be string, number, etc.)
+Implementation - args.reduce((acc, val) => acc + val, ''):
+
+.reduce() — Array method that iterates through each element and combines them into a single value
+(acc, val) => acc + val — Arrow function where:
+acc = accumulator (builds up the result)
+val = current value being processed
+Returns acc + val (concatenates them together)
+'' — Initial value for the accumulator (empty string)
+How it works step-by-step:
+
+For combineDetails(200):
+
+args = [200]
+Start with acc = ''
+Iteration 1: '' + 200 = '200'
+Returns '200'
+For combineDetails("hello", 100, 300):
+
+args = ["hello", 100, 300]
+Start with acc = ''
+Iteration 1: '' + "hello" = "hello"
+Iteration 2: "hello" + 100 = "hello100"
+Iteration 3: "hello100" + 300 = "hello100300"
+Returns 'hello100300'
