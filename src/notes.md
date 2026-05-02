@@ -73,3 +73,129 @@ twoDimensionalArray[1]?.[1]
 ```
 
 This is the TypeScript way to safely access nested array elements.
+
+## When will i use 2D array in automation scenarios?
+
+> when i am reading data from csv and excel files, etc
+
+## Tuple?
+
+> a fixed length ordered array
+
+> each element of a tuple can be of a different type
+
+> tuples let you define the exact type and number of elements
+
+
+## Fixing the errors got in the console on non - executing the faker library
+
+#### 📦 Node Modules: CommonJS vs ESM
+
+* **CommonJS (old Node)**
+
+  ```js
+  const lib = require('lib');
+  module.exports = {};
+  ```
+
+* **ESM (modern JS)**
+
+  ```js
+  import lib from 'lib';
+  export {};
+  ```
+
+---
+
+#### 🧠 What is a Node-style ESM package?
+
+* Uses **`import/export`**
+* Follows **Node.js ESM rules**
+* Example: `@faker-js/faker`
+* Requires proper ESM setup in your project
+
+---
+
+#### ❗ Root cause of errors
+
+> Mismatch between:
+
+* Your code → `import`
+* TypeScript config → CommonJS ❌
+* Package → ESM ✅
+
+👉 Result: module not found / import errors
+
+---
+
+#### ⚙️ Required TypeScript config (ESM setup)
+
+```json
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    "types": ["node"]
+  }
+}
+```
+
+---
+
+#### 📦 package.json requirement
+
+```json
+{
+  "type": "module"
+}
+```
+
+---
+
+#### ▶️ Execution flow (important)
+
+```
+TypeScript Code (.ts)
+        ↓
+TypeScript Compiler (tsconfig)
+        ↓
+Module Resolution (NodeNext)
+        ↓
+Node.js Runtime (ESM/CommonJS)
+        ↓
+Execution
+```
+
+---
+
+#### 🚨 Key rule
+
+* `import` → use **ESM (NodeNext)**
+* `require` → use **CommonJS**
+
+👉 Don’t mix both
+
+---
+
+#### 💡 Practical takeaway
+
+* ESM = modern standard
+* NodeNext = aligns TS with Node behavior
+* Errors happen when **TS + Node + package are not aligned**
+
+---
+
+#### 🎯 Quick fallback (when stuck)
+
+```js
+const { faker } = require('@faker-js/faker');
+```
+
+👉 Use this to avoid config issues during learning
+
+---
+
+#### 🧠 Interview-ready line
+
+> “Module errors in TypeScript usually come from mismatched module systems (CommonJS vs ESM) and incorrect moduleResolution settings.”

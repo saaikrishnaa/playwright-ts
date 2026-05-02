@@ -10,11 +10,11 @@
     // "module": "nodenext",
     // "target": "esnext",
     "target": "es2016",
-    "module": "commonjs",
+    "module": "nodenext",
     "rootDir": "./src",
     "outDir": "./dist",
     "strict":true,
-    "types": [],
+    "types": ["node"],
     // For nodejs:
     // "lib": ["esnext"],
     // "types": ["node"],
@@ -45,5 +45,6 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
+    "moduleResolution": "nodenext"
   }
 }
